@@ -45,6 +45,7 @@ class ImageDisplayFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
+
     fun setImages(_images: IntArray){
         images = _images
 

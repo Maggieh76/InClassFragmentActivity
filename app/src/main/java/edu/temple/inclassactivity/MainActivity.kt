@@ -2,6 +2,7 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
         // Attach an instance of ImageDisplayFragment using factory method
+        findViewById<Button>(R.id.button).setOnClickListener {
+            (supportFragmentManager.findFragmentById(R.id.container) as ImageDisplayFragment).setImages(imageArray)
+        }
+
         if(supportFragmentManager.findFragmentById(R.id.container) !is ImageDisplayFragment) //checks if fragment is already in container,
                                                                                 // don't add twice, only goes through if it's not in there
             supportFragmentManager
@@ -25,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null) //add transaction to backstack
                 .setReorderingAllowed(true)
                 .commit()
-
+         //reference to fragment in container and then cast it
 
         //supportFragmentManager.beginTransaction().add(R.id.container, ImageDisplayFragment.newInstance(imageArray)).commit()
     }
